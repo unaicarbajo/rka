@@ -16,8 +16,8 @@ def main():
     
     robot = MoveTank(OUTPUT_B, OUTPUT_C)
     for _ in range(0, 4):
-        forward(robot, 50, 4)
-        turnLeft(robot, 0, 19, 2)
+        forward(robot, 10.5, 4)
+        turnLeft(robot, 0, 19.3, 2)
     print("Square finished")
     
 if __name__=="__main__":
