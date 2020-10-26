@@ -3,6 +3,7 @@ from ev3dev2.motor import OUTPUT_C, OUTPUT_B, MoveTank
 from ev3dev2.sensor import Sensor
 from time import sleep
 from ev3dev2.sensor import INPUT_2
+import random
 
 def main():
     robot = MoveTank(OUTPUT_C,OUTPUT_B)
@@ -24,8 +25,8 @@ def main():
         s7 = lsa.value(7)
 
         print("{},{},{},{},{},{},{},{}".format(s0,s1,s2,s3,s4,s5,s6,s7))
-        left_per = 1
-        right_per = 1
+        
+
 
         if not(s3 < umbral and s4 < umbral):
             if s0 < umbral and s1 < umbral:
@@ -44,10 +45,10 @@ def main():
                 left_per = 0.15
             elif s7 < umbral:
                 right_per = 0.15
-            else:
-                left_per = 0
-                right_per = 0
 
+        else:
+            left_per = 1
+            right_per = 1
 
         robot.on(vl*left_per, vr*right_per)
 
