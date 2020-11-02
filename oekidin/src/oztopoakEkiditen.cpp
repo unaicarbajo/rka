@@ -92,6 +92,7 @@ main(int argc, const char **argv)
       
       /* Laserraren irakurketak kudeatu */
       
+      /*
       for (i = 0; i < count; i++)
       {
         if (laserra.GetRange(i) > max && laserra.GetRange(i) != laserra.GetMaxRange())
@@ -105,6 +106,7 @@ main(int argc, const char **argv)
           minind = i;
           }
       }
+      */
       
       //float x = robota.GetXPos();
       //float y = robota.GetYPos();
@@ -126,21 +128,25 @@ main(int argc, const char **argv)
           // Positions: [0-1] 0: least important, 1 most important
           reg_i = i/90;
           // Smaller the distance, greater the numerator => greater alpha
-          norm_distance = 1-laserra.GetRange(i)/8.1;
-          // 
+          norm_distance = 1-laserra.GetRange(i)/8;
           right_alpha = right_alpha + (reg_i+norm_distance)/2;
       }
-      alphaAS = right_alpha/(count/2);
-      for (i = count/2+1; i < count; i++){
+      right_alpha = right_alpha/(count/2);
+      for (i = count/2+1; i < count; i++)
+      {
           // 90->179 MOST-LEAST priority
           // positions: [0-1] 0: least important, 1 most important  
-          reg_i = (i - 90)/90;
+          reg_i = (180-i)/90; //(i - 90)/90;
           // Smaller the distance, greater the numerator => greater alpha
-          norm_distance = 1-laserra.GetRange(i)/8.1;
+          norm_distance = 1-laserra.GetRange(i)/8;
           left_alpha = left_alpha + (reg_i+norm_distance)/2;
       }
-      alphaAS = alphaAS - left_alpha/(count/2);
-      std::cout << 'alphaAS: '<< alphaAS << '\n' << std::endl;
+      left_alpha = left_alpha/(count/2);
+      alphaAS = right_alpha - left_alpha;
+      //(left_alpha < right_alpha) ? alphaLS=right_alpha : alphaLS=left_alpha;
+      std::cout << "Right_alpha: " << right_alpha << "\t" << "Left_alpha: " << -left_alpha << "\t" << "AlphaAS: " << alphaAS << std::endl;
+      std::cout << "% RIGHT: " << (right_alpha/(right_alpha + left_alpha))*100 << "%\t" << "% LEFT: " << left_alpha/(right_alpha + left_alpha)*100 << "%\n" << std::endl;
+
       //////////////////////////////////////////////////////
       ////////// Calculate alphaLS and alphaAS /////////////
       //////////////////////////////////////////////////////
@@ -175,7 +181,12 @@ main(int argc, const char **argv)
           aspeed = -(1+alphaAS)*aspeed + alphaAS*unif(rng);
         }
       } else{
-        aspeed = (1-alphaAS)*aspeed + alphaAS*unif(rng);
+          if (aspeed < 0){
+            aspeed = -(1-alphaAS)*aspeed + alphaAS*unif(rng);
+          }
+          else{
+            aspeed = (1-alphaAS)*aspeed + alphaAS*unif(rng);
+          }
       }
       // Set robot's speed
       robota.SetSpeed(lspeed, aspeed);
