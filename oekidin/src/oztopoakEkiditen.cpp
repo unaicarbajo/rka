@@ -9,13 +9,13 @@
 #include <chrono>
 
 std::ofstream datuFitx;
-std::string fileName = "outData.txt";
+std::string fileName = "out.csv";
 
 void
 closeAll(int signum)
 {
   std::cout << "Interrupt signal (" << signum << ") received\n";
-  //datuFitx.close();
+  datuFitx.close();
   exit(signum);
 }
 
@@ -55,8 +55,7 @@ main(int argc, const char **argv)
       bezeroa.Read();
 
     // Fitxategia prestatu 
-    // datuFitx.open(fileName, ios::out);
-    // datuFitx  << "# Robotaren (rx ry) koordenatuak \n";
+    datuFitx.open(fileName, std::ios::out);
 
     int count = laserra.GetCount();
     
@@ -67,16 +66,11 @@ main(int argc, const char **argv)
     std::cout << "Max angle: " <<  laserra.GetMaxAngle() << std::endl;
     std::cout << "Min angle: " <<  laserra.GetMinAngle() << std::endl;
 
-
-    float max = -1.0;
-    float min = laserra.GetMaxRange();
-    int maxind = -1;
-    int minind = -1;
     float alphaLS = 0.0;
     float alphaAS = 0.0;
     float lspeed = 0.5;
     float aspeed = 0.3;
-    float norm_distance, reg_i, left_alpha, right_alpha;
+    float norm_distance, reg_i, left_alpha, right_alpha, scaled_lspeed, scaled_aspeed, y, x;
 
     std::mt19937_64 rng;
     // Initialize the random number generator with time-dependent seed
@@ -89,32 +83,13 @@ main(int argc, const char **argv)
     while (1)
       { 
       bezeroa.Read();
-      
-      /* Laserraren irakurketak kudeatu */
-      
-      /*
-      for (i = 0; i < count; i++)
-      {
-        if (laserra.GetRange(i) > max && laserra.GetRange(i) != laserra.GetMaxRange())
-          {
-          max = laserra.GetRange(i);
-          maxind = i;
-          }
-          if (laserra.GetRange(i) < min)
-          {
-          min = laserra.GetRange(i);
-          minind = i;
-          }
-      }
-      */
-      
-      //float x = robota.GetXPos();
-      //float y = robota.GetYPos();
-      //datuFitx  << x << " " << y  << "\n";
+      x = robota.GetXPos();
+	    y = robota.GetYPos();
+      datuFitx  << x << ";" << y  << "\n";
 
-      // Angle:
-      // left: 179-90
-      // right: 0-89
+      //////////////////////////////////////////////////////
+      ////////// Calculate alphaLS and alphaAS /////////////
+      //////////////////////////////////////////////////////
 
       alphaLS = 0.0;
       alphaAS = 0.0;
@@ -122,6 +97,7 @@ main(int argc, const char **argv)
       right_alpha = 0.0;
       left_alpha = 0.0;
 
+      // Right side alpha
       for (i = 0; i < count/2; i++)
       {
           // 0->90 LESS-MOST priority
@@ -132,6 +108,8 @@ main(int argc, const char **argv)
           right_alpha = right_alpha + (reg_i+norm_distance)/2;
       }
       right_alpha = right_alpha/(count/2);
+      
+      // Left side alpha
       for (i = count/2+1; i < count; i++)
       {
           // 90->179 MOST-LEAST priority
@@ -142,33 +120,20 @@ main(int argc, const char **argv)
           left_alpha = left_alpha + (reg_i+norm_distance)/2;
       }
       left_alpha = left_alpha/(count/2);
+    
       alphaAS = right_alpha - left_alpha;
-      //(left_alpha < right_alpha) ? alphaLS=right_alpha : alphaLS=left_alpha;
-      std::cout << "Right_alpha: " << right_alpha << "\t" << "Left_alpha: " << -left_alpha << "\t" << "AlphaAS: " << alphaAS << std::endl;
-      std::cout << "% RIGHT: " << (right_alpha/(right_alpha + left_alpha))*100 << "%\t" << "% LEFT: " << left_alpha/(right_alpha + left_alpha)*100 << "%\n" << std::endl;
-
-      //////////////////////////////////////////////////////
-      ////////// Calculate alphaLS and alphaAS /////////////
-      //////////////////////////////////////////////////////
+      (left_alpha < right_alpha) ? alphaLS=right_alpha : alphaLS=left_alpha;
       
-      // alphaLS: alpha for linear speed
-      // alphaAS: alpha for angular speed
-
-      // if (laserra.GetRange(40) < laserra.GetRange(140)){
-      //   alphaLS = 1.0;
-      //   alphaAS = 0.3;
-      // } else {
-      //   alphaLS = 1.0;
-      //   alphaAS = -0.3;
-      // }
-
-
+      // PRINT
+      //std::cout << "Right_alpha: " << right_alpha << "\t" << "Left_alpha: " << -left_alpha << "\t" << "AlphaAS: " << alphaAS << std::endl;
+      //std::cout << "% RIGHT: " << (right_alpha/(right_alpha + left_alpha))*100 << "%\t" << "% LEFT: " << left_alpha/(right_alpha + left_alpha)*100 << "%\n" << std::endl;
 
       //////////////////////////////////////////////////////
       ////// Apply low pass filter and set speeds //////////
       //////////////////////////////////////////////////////
       // Low pass filter: actual_value = (1-change_value)*previous_value + change_value*random(0,1)
       
+
       // Linear speed with low pass filter
       lspeed = (1-alphaLS)*lspeed + alphaLS*unif(rng);
       // Angular speed with low pass filter
@@ -188,15 +153,28 @@ main(int argc, const char **argv)
             aspeed = (1-alphaAS)*aspeed + alphaAS*unif(rng);
           }
       }
-      // Set robot's speed
+
+      /////////////////////////////////////////////////////////
+      ///////////////////// SCALING ///////////////////////////
+      /////////////////////////////////////////////////////////
+
+      // scaled_lspeed [0, 0.3]
+      scaled_lspeed = lspeed * 0.3;
+      // scaled_aspeed [-0.4,0.4]
+      scaled_aspeed = aspeed * 0.4;
+
+
+      /////////////////////////////////////////////////////////
+      ///////////////////// SET SPEED /////////////////////////
+      /////////////////////////////////////////////////////////
+
+      // FULL SPEED
+      std::cout << "LSPEED: " << lspeed << "\t" << "ASPEED" << aspeed << std::endl;
       robota.SetSpeed(lspeed, aspeed);
-      
-      //////////////////////////////////////////////////////
-      //////////////// Print info //////////////////////////
-      //////////////////////////////////////////////////////
-      //std::cout << "Max Reading: " <<  max << " Index:" << maxind << std::endl;
-      //std::cout << "Min Reading: " <<  min << " Index:" << minind << std::endl;
-      //std::cout << "-----------------------------------" << std::endl;
+
+      // SCALED SPEED
+      //std::cout << "LSPEED [scaled]: " << scaled_lspeed << "\t" << "ASPEED [scaled]" << scaled_aspeed << std::endl;
+      //robota.SetSpeed(scaled_lspeed, scaled_aspeed);
       
       }
   }

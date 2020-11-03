@@ -35,7 +35,7 @@ floorplan
   name "cave"
   size [16.000 16.000 0.800]
   pose [0 0 0 0]
-  bitmap "bitmaps/cave_prueba.png"
+  bitmap "bitmaps/cave.png"
 )
 
 
