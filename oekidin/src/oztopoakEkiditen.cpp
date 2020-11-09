@@ -8,14 +8,14 @@
 #include <random>
 #include <chrono>
 
-std::ofstream datuFitx;
-std::string fileName = "out.csv";
+//std::ofstream datuFitx;
+//std::string fileName = "out.csv";
 
 void
 closeAll(int signum)
 {
   std::cout << "Interrupt signal (" << signum << ") received\n";
-  datuFitx.close();
+  //datuFitx.close();
   exit(signum);
 }
 
@@ -55,7 +55,7 @@ main(int argc, const char **argv)
       bezeroa.Read();
 
     // Fitxategia prestatu 
-    datuFitx.open(fileName, std::ios::out);
+    //datuFitx.open(fileName, std::ios::out);
 
     int count = laserra.GetCount();
     
@@ -85,7 +85,7 @@ main(int argc, const char **argv)
       bezeroa.Read();
       x = robota.GetXPos();
 	    y = robota.GetYPos();
-      datuFitx  << x << ";" << y  << "\n";
+      //datuFitx  << x << ";" << y  << "\n";
 
       //////////////////////////////////////////////////////
       ////////// Calculate alphaLS and alphaAS /////////////
@@ -169,12 +169,12 @@ main(int argc, const char **argv)
       /////////////////////////////////////////////////////////
 
       // FULL SPEED
-      std::cout << "LSPEED: " << lspeed << "\t" << "ASPEED" << aspeed << std::endl;
-      robota.SetSpeed(lspeed, aspeed);
+      //std::cout << "LSPEED: " << lspeed << "\t" << "ASPEED" << aspeed << std::endl;
+      //robota.SetSpeed(lspeed, aspeed);
 
       // SCALED SPEED
       //std::cout << "LSPEED [scaled]: " << scaled_lspeed << "\t" << "ASPEED [scaled]" << scaled_aspeed << std::endl;
-      //robota.SetSpeed(scaled_lspeed, scaled_aspeed);
+      robota.SetSpeed(scaled_lspeed, scaled_aspeed);
       
       }
   }

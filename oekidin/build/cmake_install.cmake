@@ -1,4 +1,4 @@
-# Install script for directory: /users/869211/Desktop/rka/oekidin/build
+# Install script for directory: /home/ehu/Desktop/rka/oekidin/build
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,18 +39,18 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/users/869211/Desktop/rka/oekidin/build/bin/laserInfo")
+   "/home/ehu/Desktop/rka/oekidin/build/bin/laserInfo")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/users/869211/Desktop/rka/oekidin/build/bin" TYPE EXECUTABLE FILES "/users/869211/Desktop/rka/oekidin/build/laserInfo")
-  if(EXISTS "$ENV{DESTDIR}/users/869211/Desktop/rka/oekidin/build/bin/laserInfo" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}/users/869211/Desktop/rka/oekidin/build/bin/laserInfo")
+file(INSTALL DESTINATION "/home/ehu/Desktop/rka/oekidin/build/bin" TYPE EXECUTABLE FILES "/home/ehu/Desktop/rka/oekidin/build/laserInfo")
+  if(EXISTS "$ENV{DESTDIR}/home/ehu/Desktop/rka/oekidin/build/bin/laserInfo" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}/home/ehu/Desktop/rka/oekidin/build/bin/laserInfo")
     if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/users/869211/Desktop/rka/oekidin/build/bin/laserInfo")
+      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/home/ehu/Desktop/rka/oekidin/build/bin/laserInfo")
     endif()
   endif()
 endif()
@@ -63,5 +63,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/users/869211/Desktop/rka/oekidin/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/ehu/Desktop/rka/oekidin/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

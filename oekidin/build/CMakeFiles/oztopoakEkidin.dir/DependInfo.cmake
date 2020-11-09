@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/users/869211/Desktop/rka/oekidin/src/oztopoakEkiditen.cpp" "/users/869211/Desktop/rka/oekidin/build/CMakeFiles/oztopoakEkidin.dir/users/869211/Desktop/rka/oekidin/src/oztopoakEkiditen.cpp.o"
+  "/home/ehu/Desktop/rka/oekidin/src/oztopoakEkiditen.cpp" "/home/ehu/Desktop/rka/oekidin/build/CMakeFiles/oztopoakEkidin.dir/home/ehu/Desktop/rka/oekidin/src/oztopoakEkiditen.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

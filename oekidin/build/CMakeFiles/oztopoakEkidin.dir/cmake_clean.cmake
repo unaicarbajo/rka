@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/oztopoakEkidin.dir/users/869211/Desktop/rka/oekidin/src/oztopoakEkiditen.cpp.o"
+  "CMakeFiles/oztopoakEkidin.dir/home/ehu/Desktop/rka/oekidin/src/oztopoakEkiditen.cpp.o"
   "oztopoakEkidin.pdb"
   "oztopoakEkidin"
 )

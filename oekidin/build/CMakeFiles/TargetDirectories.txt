@@ -1,8 +1,8 @@
-/users/869211/Desktop/rka/oekidin/build/CMakeFiles/install/strip.dir
-/users/869211/Desktop/rka/oekidin/build/CMakeFiles/install/local.dir
-/users/869211/Desktop/rka/oekidin/build/CMakeFiles/list_install_components.dir
-/users/869211/Desktop/rka/oekidin/build/CMakeFiles/laserInfo.dir
-/users/869211/Desktop/rka/oekidin/build/CMakeFiles/oztopoakEkidin.dir
-/users/869211/Desktop/rka/oekidin/build/CMakeFiles/edit_cache.dir
-/users/869211/Desktop/rka/oekidin/build/CMakeFiles/rebuild_cache.dir
-/users/869211/Desktop/rka/oekidin/build/CMakeFiles/install.dir
+/home/ehu/Desktop/rka/oekidin/build/CMakeFiles/install/strip.dir
+/home/ehu/Desktop/rka/oekidin/build/CMakeFiles/install/local.dir
+/home/ehu/Desktop/rka/oekidin/build/CMakeFiles/list_install_components.dir
+/home/ehu/Desktop/rka/oekidin/build/CMakeFiles/laserInfo.dir
+/home/ehu/Desktop/rka/oekidin/build/CMakeFiles/oztopoakEkidin.dir
+/home/ehu/Desktop/rka/oekidin/build/CMakeFiles/edit_cache.dir
+/home/ehu/Desktop/rka/oekidin/build/CMakeFiles/rebuild_cache.dir
+/home/ehu/Desktop/rka/oekidin/build/CMakeFiles/install.dir
