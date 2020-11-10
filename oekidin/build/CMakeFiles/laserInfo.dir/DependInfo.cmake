@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp" "/home/ehu/Desktop/rka/oekidin/build/CMakeFiles/laserInfo.dir/home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp.o"
+  "/users/868185/Desktop/rka/oekidin/src/laserInfo.cpp" "/users/868185/Desktop/rka/oekidin/build/CMakeFiles/laserInfo.dir/users/868185/Desktop/rka/oekidin/src/laserInfo.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

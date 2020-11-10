@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ehu/Desktop/rka/oekidin/build
+CMAKE_SOURCE_DIR = /users/868185/Desktop/rka/oekidin/build
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ehu/Desktop/rka/oekidin/build
+CMAKE_BINARY_DIR = /users/868185/Desktop/rka/oekidin/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/laserInfo.dir/depend.make
@@ -57,41 +57,41 @@ include CMakeFiles/laserInfo.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/laserInfo.dir/flags.make
 
-CMakeFiles/laserInfo.dir/home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp.o: CMakeFiles/laserInfo.dir/flags.make
-CMakeFiles/laserInfo.dir/home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp.o: /home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ehu/Desktop/rka/oekidin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/laserInfo.dir/home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/laserInfo.dir/home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp.o -c /home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp
+CMakeFiles/laserInfo.dir/users/868185/Desktop/rka/oekidin/src/laserInfo.cpp.o: CMakeFiles/laserInfo.dir/flags.make
+CMakeFiles/laserInfo.dir/users/868185/Desktop/rka/oekidin/src/laserInfo.cpp.o: /users/868185/Desktop/rka/oekidin/src/laserInfo.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/868185/Desktop/rka/oekidin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/laserInfo.dir/users/868185/Desktop/rka/oekidin/src/laserInfo.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/laserInfo.dir/users/868185/Desktop/rka/oekidin/src/laserInfo.cpp.o -c /users/868185/Desktop/rka/oekidin/src/laserInfo.cpp
 
-CMakeFiles/laserInfo.dir/home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/laserInfo.dir/home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp > CMakeFiles/laserInfo.dir/home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp.i
+CMakeFiles/laserInfo.dir/users/868185/Desktop/rka/oekidin/src/laserInfo.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/laserInfo.dir/users/868185/Desktop/rka/oekidin/src/laserInfo.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/868185/Desktop/rka/oekidin/src/laserInfo.cpp > CMakeFiles/laserInfo.dir/users/868185/Desktop/rka/oekidin/src/laserInfo.cpp.i
 
-CMakeFiles/laserInfo.dir/home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/laserInfo.dir/home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp -o CMakeFiles/laserInfo.dir/home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp.s
+CMakeFiles/laserInfo.dir/users/868185/Desktop/rka/oekidin/src/laserInfo.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/laserInfo.dir/users/868185/Desktop/rka/oekidin/src/laserInfo.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/868185/Desktop/rka/oekidin/src/laserInfo.cpp -o CMakeFiles/laserInfo.dir/users/868185/Desktop/rka/oekidin/src/laserInfo.cpp.s
 
-CMakeFiles/laserInfo.dir/home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp.o.requires:
+CMakeFiles/laserInfo.dir/users/868185/Desktop/rka/oekidin/src/laserInfo.cpp.o.requires:
 
-.PHONY : CMakeFiles/laserInfo.dir/home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp.o.requires
+.PHONY : CMakeFiles/laserInfo.dir/users/868185/Desktop/rka/oekidin/src/laserInfo.cpp.o.requires
 
-CMakeFiles/laserInfo.dir/home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp.o.provides: CMakeFiles/laserInfo.dir/home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp.o.requires
-	$(MAKE) -f CMakeFiles/laserInfo.dir/build.make CMakeFiles/laserInfo.dir/home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp.o.provides.build
-.PHONY : CMakeFiles/laserInfo.dir/home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp.o.provides
+CMakeFiles/laserInfo.dir/users/868185/Desktop/rka/oekidin/src/laserInfo.cpp.o.provides: CMakeFiles/laserInfo.dir/users/868185/Desktop/rka/oekidin/src/laserInfo.cpp.o.requires
+	$(MAKE) -f CMakeFiles/laserInfo.dir/build.make CMakeFiles/laserInfo.dir/users/868185/Desktop/rka/oekidin/src/laserInfo.cpp.o.provides.build
+.PHONY : CMakeFiles/laserInfo.dir/users/868185/Desktop/rka/oekidin/src/laserInfo.cpp.o.provides
 
-CMakeFiles/laserInfo.dir/home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp.o.provides.build: CMakeFiles/laserInfo.dir/home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp.o
+CMakeFiles/laserInfo.dir/users/868185/Desktop/rka/oekidin/src/laserInfo.cpp.o.provides.build: CMakeFiles/laserInfo.dir/users/868185/Desktop/rka/oekidin/src/laserInfo.cpp.o
 
 
 # Object files for target laserInfo
 laserInfo_OBJECTS = \
-"CMakeFiles/laserInfo.dir/home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp.o"
+"CMakeFiles/laserInfo.dir/users/868185/Desktop/rka/oekidin/src/laserInfo.cpp.o"
 
 # External object files for target laserInfo
 laserInfo_EXTERNAL_OBJECTS =
 
-laserInfo: CMakeFiles/laserInfo.dir/home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp.o
+laserInfo: CMakeFiles/laserInfo.dir/users/868185/Desktop/rka/oekidin/src/laserInfo.cpp.o
 laserInfo: CMakeFiles/laserInfo.dir/build.make
 laserInfo: CMakeFiles/laserInfo.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ehu/Desktop/rka/oekidin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable laserInfo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/users/868185/Desktop/rka/oekidin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable laserInfo"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/laserInfo.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -99,7 +99,7 @@ CMakeFiles/laserInfo.dir/build: laserInfo
 
 .PHONY : CMakeFiles/laserInfo.dir/build
 
-CMakeFiles/laserInfo.dir/requires: CMakeFiles/laserInfo.dir/home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp.o.requires
+CMakeFiles/laserInfo.dir/requires: CMakeFiles/laserInfo.dir/users/868185/Desktop/rka/oekidin/src/laserInfo.cpp.o.requires
 
 .PHONY : CMakeFiles/laserInfo.dir/requires
 
@@ -108,6 +108,6 @@ CMakeFiles/laserInfo.dir/clean:
 .PHONY : CMakeFiles/laserInfo.dir/clean
 
 CMakeFiles/laserInfo.dir/depend:
-	cd /home/ehu/Desktop/rka/oekidin/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ehu/Desktop/rka/oekidin/build /home/ehu/Desktop/rka/oekidin/build /home/ehu/Desktop/rka/oekidin/build /home/ehu/Desktop/rka/oekidin/build /home/ehu/Desktop/rka/oekidin/build/CMakeFiles/laserInfo.dir/DependInfo.cmake --color=$(COLOR)
+	cd /users/868185/Desktop/rka/oekidin/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /users/868185/Desktop/rka/oekidin/build /users/868185/Desktop/rka/oekidin/build /users/868185/Desktop/rka/oekidin/build /users/868185/Desktop/rka/oekidin/build /users/868185/Desktop/rka/oekidin/build/CMakeFiles/laserInfo.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/laserInfo.dir/depend
 

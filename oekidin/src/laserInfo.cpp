@@ -54,6 +54,7 @@ main(int argc, const char **argv)
 	bezeroa.Read();
 	for (i = 0; i < count; i++)
 	  {
+
 	    if (laserra.GetRange(i) > max && laserra.GetRange(i) != laserra.GetMaxRange())
 	      {
 		max = laserra.GetRange(i);
@@ -65,12 +66,19 @@ main(int argc, const char **argv)
 		minind = i;
 	      }
 	  }
+
+    std::cout << "Bearing angle 0: " <<  laserra.GetBearing(0) << std::endl;
+    std::cout << "-----------------------------------" << std::endl;
+    std::cout << "Bearing angle 89: " <<  laserra.GetBearing(89) << std::endl;
+    std::cout << "-----------------------------------" << std::endl;
+    std::cout << "Bearing angle 179: " <<  laserra.GetBearing(179) << std::endl;
+    std::cout << "-----------------------------------" << std::endl;
 	// Print info
 	
-	std::cout << "Max Reading: " <<  max << " Index:" << maxind << std::endl;
-	std::cout << "Min Reading: " <<  min << " Index:" << minind << std::endl;
-	std::cout << "-----------------------------------" << std::endl;
-	// robota.SetSpeed(0, 0.2);
+	//std::cout << "Max Reading: " <<  max << " Index:" << maxind << std::endl;
+	//std::cout << "Min Reading: " <<  min << " Index:" << minind << std::endl;
+
+	//robota.SetSpeed(0, 0.05);
       }
   }
   catch (PlayerCc::PlayerError & e)

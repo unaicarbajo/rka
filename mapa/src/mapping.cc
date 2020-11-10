@@ -36,6 +36,7 @@
 #define SCALE 20
 float rx, ry, rtheta;
 float rx0, ry0, rtheta0;
+float mx, my;
 
 cv::Mat map = cv::Mat(MXSIZE, MYSIZE, CV_8UC3, cv::Scalar(0, 0, 0));
 
@@ -151,15 +152,19 @@ void laserMapping()
 	  /* Laserraren irakurketak proiektatu behar dira munduan */
 	  for ( i = 0; i < sick.GetCount(); i++)
 	    {
+        std::cout << "range: " << sick.GetRange(i) << "\t max: "<< sick.GetMaxRange() << "\n";
         // Inside the laser range
 	      if (sick.GetRange(i) < sick.GetMaxRange())
 	       	{
-		        lx =  ;
-		        ly = rx + 2 ;
+            mx = sin(robot.GetYaw() + sick.GetBearing(i))*sick.GetRange(i);
+            my = cos(robot.GetYaw() + sick.GetBearing(i))*sick.GetRange(i);
+
+            lx = rx + mx;
+            
+            ly = ry + my;
+		        
+            setObstacle(lx, ly, color1);
           }
-		  // Set the obstacle in the map
-		  setObstacle(lx, ly, color1);
-		// }
 	    }
 	  usleep(100000);
 	  /* Mapa bistaratu */

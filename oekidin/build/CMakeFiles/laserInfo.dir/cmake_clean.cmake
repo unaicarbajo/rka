@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/laserInfo.dir/home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp.o"
+  "CMakeFiles/laserInfo.dir/users/868185/Desktop/rka/oekidin/src/laserInfo.cpp.o"
   "laserInfo.pdb"
   "laserInfo"
 )

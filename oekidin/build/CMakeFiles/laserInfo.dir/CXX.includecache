@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/ehu/Desktop/rka/oekidin/src/laserInfo.cpp
+/users/868185/Desktop/rka/oekidin/src/laserInfo.cpp
 stdio.h
 -
 stdlib.h
