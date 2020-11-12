@@ -53,11 +53,11 @@ pioneer2dx
 #  ctrl "wander"
 
   # report error-free position in world coordinates
-  #localization "gps"
+  localization "gps"
   #localization_origin [ 0 0 0 0 ]
-  localization "odom"
-  odom_error [0.00 0.0 0.00 1.0]
-  trail_length 400
+  #localization "odom"
+  #odom_error [0.00 0.0 0.00 1.0]
+  #trail_length 400
     
 )
 

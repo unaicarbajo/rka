@@ -34,9 +34,7 @@
 #define MXSIZE 1000
 #define MYSIZE 1000
 #define SCALE 20
-float rx, ry, rtheta;
 float rx0, ry0, rtheta0;
-float mx, my;
 
 cv::Mat map = cv::Mat(MXSIZE, MYSIZE, CV_8UC3, cv::Scalar(0, 0, 0));
 
@@ -123,6 +121,7 @@ void laserMapping()
 {
   int i;
   float lx, ly, ltheta;
+  float mx, my, rtheta, rx, ry;
 
   cv::namedWindow("MAP", CV_WINDOW_AUTOSIZE);
 
@@ -138,7 +137,8 @@ void laserMapping()
 
       for (i = 0; i < 10; i++)
 	  robotClient.Read();
-
+      lx = 0;
+      ly = 0;
       for (;;)
 	{
 	  robotClient.Read();
@@ -156,8 +156,8 @@ void laserMapping()
         // Inside the laser range
 	      if (sick.GetRange(i) < sick.GetMaxRange())
 	       	{
-            mx = sin(robot.GetYaw() + sick.GetBearing(i))*sick.GetRange(i);
-            my = cos(robot.GetYaw() + sick.GetBearing(i))*sick.GetRange(i);
+            mx = cos(rtheta + sick.GetBearing(i))*sick.GetRange(i);
+            my = sin(rtheta + sick.GetBearing(i))*sick.GetRange(i);
 
             lx = rx + mx;
             
