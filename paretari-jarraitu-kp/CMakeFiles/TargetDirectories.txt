@@ -1,0 +1,7 @@
+/users/868185/Desktop/rka/paretari-jarraitu-kp/CMakeFiles/edit_cache.dir
+/users/868185/Desktop/rka/paretari-jarraitu-kp/CMakeFiles/install/strip.dir
+/users/868185/Desktop/rka/paretari-jarraitu-kp/CMakeFiles/paretariJarraitu.dir
+/users/868185/Desktop/rka/paretari-jarraitu-kp/CMakeFiles/rebuild_cache.dir
+/users/868185/Desktop/rka/paretari-jarraitu-kp/CMakeFiles/list_install_components.dir
+/users/868185/Desktop/rka/paretari-jarraitu-kp/CMakeFiles/install/local.dir
+/users/868185/Desktop/rka/paretari-jarraitu-kp/CMakeFiles/install.dir
