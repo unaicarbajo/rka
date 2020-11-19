@@ -1,0 +1,3 @@
+/home/ehu/Desktop/rka/mapa/build/CMakeFiles/rebuild_cache.dir
+/home/ehu/Desktop/rka/mapa/build/CMakeFiles/playerMapping.dir
+/home/ehu/Desktop/rka/mapa/build/CMakeFiles/edit_cache.dir
