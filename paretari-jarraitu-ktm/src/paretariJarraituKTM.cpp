@@ -7,7 +7,7 @@
 
 /* PARAMETROAK ZEHAZTU */
 
-#define LASER_IZPI_KOP 45
+#define LASER_IZPI_KOP 80
 
 void
 closeAll(int signum)
@@ -29,7 +29,7 @@ main(int argc, const char **argv)
   float angelua;
 
   signal(SIGINT, closeAll);
-  if (argc < 2)
+if (argc < 2)
     {
       std::cout << "Robotak paretari jarraituko dio " << std::endl;
       std::cout << "angeluaren gaineko erregresio lineala erabiliz." << std::endl;
@@ -70,23 +70,31 @@ main(int argc, const char **argv)
 	for (i = 0; i < LASER_IZPI_KOP; i++)
 	  {
 	    /* Hemen laser izpiak proiektuatu behar dira */
-	    x[i] = laserra.GetRange(i)*sin(laserra.GetBearing(i));
-	    y[i] = laserra.GetRange(i)*cos(laserra.GetBearing(i));;
-	    j++;
+      dist = laserra.GetRange(i);
+      if (dist < 4){
+        x[i] = dist*sin(laserra.GetBearing(i));
+        y[i] = dist*cos(laserra.GetBearing(i));;
+        j++;
+      }
 	  }
 
 	/* regresio lineala: karratu txikienen metodoa */
 	/* KONTUZ!! j indizeak regresioa kalkulatzeko erabiliko den */
 	/* puntu kopurua adierazten du!!  */
+
+
+  // TODO: Comprobar cuando j es 0 para que no flape
+  
 	gsl_fit_linear (x, 1, y, 1, j, 
 			&c0, &c1, &cov00, &cov01, &cov11, 
 			&batura);
+  std::cout << c1 << std::endl;
 
 	/* Kalkulatu robota eta paretaren arteko angelua */
-	angelua = M_PI/2 - abs(atan(c1));
+	angelua = abs(atan(c1));
 	
 	/* Abiadurak finkatu */
-	w = angelua * Kp;
+	w = (M_PI/2-angelua) * Kp;
 	// w = 0;
 	
 	robota.SetSpeed(0.2, w);
