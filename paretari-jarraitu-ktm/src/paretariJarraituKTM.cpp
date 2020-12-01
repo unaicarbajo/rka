@@ -71,7 +71,7 @@ if (argc < 2)
 	  {
 	    /* Hemen laser izpiak proiektuatu behar dira */
       dist = laserra.GetRange(i);
-      if (dist < 4){
+      if (dist < 2.5){
         x[i] = dist*sin(laserra.GetBearing(i));
         y[i] = dist*cos(laserra.GetBearing(i));;
         j++;
@@ -82,17 +82,17 @@ if (argc < 2)
 	/* KONTUZ!! j indizeak regresioa kalkulatzeko erabiliko den */
 	/* puntu kopurua adierazten du!!  */
 
+  // j > 1 puntu behar dira erregresio lineala egiteko
+  if (j > 1){
+	  gsl_fit_linear (x, 1, y, 1, j, 	&c0, &c1, &cov00, &cov01, &cov11, &batura);
+  }
+  angelua = abs(atan2(c1,1));
 
-  // TODO: Comprobar cuando j es 0 para que no flape
-  
-	gsl_fit_linear (x, 1, y, 1, j, 
-			&c0, &c1, &cov00, &cov01, &cov11, 
-			&batura);
-  std::cout << c1 << std::endl;
+  std::cout << "C1: "<< c1 << std::endl;
 
 	/* Kalkulatu robota eta paretaren arteko angelua */
-	angelua = abs(atan(c1));
 	
+  std::cout << "Angelua: " << angelua << std::endl;
 	/* Abiadurak finkatu */
 	w = (M_PI/2-angelua) * Kp;
 	// w = 0;
