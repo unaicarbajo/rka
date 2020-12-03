@@ -75,7 +75,7 @@ main(int argc, const char **argv)
 
     for (i = 0; i < 10; i++)
       bezeroa.Read();
-  
+
     while (1)
       {
 

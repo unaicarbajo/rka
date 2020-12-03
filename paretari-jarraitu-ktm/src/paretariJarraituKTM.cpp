@@ -7,7 +7,7 @@
 
 /* PARAMETROAK ZEHAZTU */
 
-#define LASER_IZPI_KOP 80
+#define LASER_IZPI_KOP 90
 
 void
 closeAll(int signum)
@@ -22,11 +22,14 @@ main(int argc, const char **argv)
 {
   int i, ind;
   float diff;
-  float v,w;
+  float v = 0.2;
+  float w;
   float dist;
   // string fileName = "outData.txt";
   float Kp;
-  float angelua;
+  float angelua = M_PI/2;
+  float xreg0, xreg1;
+  float yreg0, yreg1;
 
   signal(SIGINT, closeAll);
 if (argc < 2)
@@ -60,10 +63,10 @@ if (argc < 2)
     for (i = 0; i<10; i++)
     	bezeroa.Read();
 
-    while (1)
+   while (1)
       {
-	diff = 0;
-	bezeroa.Read();
+      diff = 0;
+      bezeroa.Read();
 	/* Kalkulatu irakurketa "motzen" proiekzioak */
 
 	j = 0;
@@ -85,19 +88,25 @@ if (argc < 2)
   // j > 1 puntu behar dira erregresio lineala egiteko
   if (j > 1){
 	  gsl_fit_linear (x, 1, y, 1, j, 	&c0, &c1, &cov00, &cov01, &cov11, &batura);
+    xreg1 = x[j];
+    yreg1 = c0 + c1*xreg1;
+    xreg0 = x[0];
+    yreg0 = c0 + c1*xreg0;
+    angelua = abs(atan2(yreg1-yreg0, xreg1 - xreg0));
   }
-  angelua = abs(atan2(c1,1));
-
-  std::cout << "C1: "<< c1 << std::endl;
-
+  
 	/* Kalkulatu robota eta paretaren arteko angelua */
 	
   std::cout << "Angelua: " << angelua << std::endl;
 	/* Abiadurak finkatu */
 	w = (M_PI/2-angelua) * Kp;
-	// w = 0;
-	
+
+
+
+  std::cout << "w: " << w << std::endl;
+
 	robota.SetSpeed(0.2, w);
+  //robota.SetSpeed(0,0);
 	
       }
     
@@ -107,6 +116,4 @@ if (argc < 2)
       std::cerr << e << std::endl;
       return -1;
     }
-  
-  return 0;
 }
