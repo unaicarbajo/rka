@@ -4,16 +4,21 @@
 #include <libplayerc++/playerc++.h>
 #include <iostream>
 #include <gsl/gsl_fit.h>
+#include <fstream>
+
 
 /* PARAMETROAK ZEHAZTU */
 
 #define LASER_IZPI_KOP 90
+//std::ofstream datuFitx;
+
+using namespace std;
 
 void
 closeAll(int signum)
 {
   std::cout << "Interrupt signal (" << signum << ") received\n";
-  // datuFitx.close();
+  //datuFitx.close();
   exit(signum); 
 }
 
@@ -25,7 +30,7 @@ main(int argc, const char **argv)
   float v = 0.2;
   float w;
   float dist;
-  // string fileName = "outData.txt";
+  string fileName;
   float Kp;
   float angelua = M_PI/2;
   float xreg0, xreg1;
@@ -41,8 +46,8 @@ if (argc < 2)
     }
   Kp = atof(argv[1]);
   if (argc == 3)
-    // fileName = argv[2];
-  // datuFitx.open(fileName, ios::out);
+    //fileName = argv[2];
+  //datuFitx.open(fileName, ios::out);
 
   try
   {
@@ -50,6 +55,8 @@ if (argc < 2)
     double x[LASER_IZPI_KOP], y[LASER_IZPI_KOP];
     double theta;
     int j = 0;
+    int batch = 0;
+    float errorea;
 
     using namespace PlayerCc;
 
@@ -67,47 +74,44 @@ if (argc < 2)
       {
       diff = 0;
       bezeroa.Read();
-	/* Kalkulatu irakurketa "motzen" proiekzioak */
+      /* Kalkulatu irakurketa "motzen" proiekzioak */
 
-	j = 0;
-	for (i = 0; i < LASER_IZPI_KOP; i++)
-	  {
-	    /* Hemen laser izpiak proiektuatu behar dira */
-      dist = laserra.GetRange(i);
-      if (dist < 2.5){
-        x[i] = dist*sin(laserra.GetBearing(i));
-        y[i] = dist*cos(laserra.GetBearing(i));;
-        j++;
+      j = 0;
+      for (i = 0; i < LASER_IZPI_KOP; i++)
+        {
+          /* Hemen laser izpiak proiektuatu behar dira */
+          dist = laserra.GetRange(i);
+          if (dist < 2.5){
+            x[i] = dist*sin(laserra.GetBearing(i));
+            y[i] = dist*cos(laserra.GetBearing(i));;
+            j++;
+          }
+        }
+
+      /* regresio lineala: karratu txikienen metodoa */
+      /* KONTUZ!! j indizeak regresioa kalkulatzeko erabiliko den */
+      /* puntu kopurua adierazten du!!  */
+
+      // j > 1 puntu behar dira erregresio lineala egiteko
+      if (j > 1){
+        gsl_fit_linear (x, 1, y, 1, j, 	&c0, &c1, &cov00, &cov01, &cov11, &batura);
+        xreg1 = x[j];
+        yreg1 = c0 + c1*xreg1;
+        xreg0 = x[0];
+        yreg0 = c0 + c1*xreg0;
+        /* Kalkulatu robota eta paretaren arteko angelua */
+        angelua = abs(atan2(yreg1-yreg0, xreg1 - xreg0));
       }
-	  }
+      /* Abiadurak finkatu */
+      errorea = (M_PI/2-angelua);
+      w = errorea * Kp;
 
-	/* regresio lineala: karratu txikienen metodoa */
-	/* KONTUZ!! j indizeak regresioa kalkulatzeko erabiliko den */
-	/* puntu kopurua adierazten du!!  */
+      robota.SetSpeed(0.2, w);
 
-  // j > 1 puntu behar dira erregresio lineala egiteko
-  if (j > 1){
-	  gsl_fit_linear (x, 1, y, 1, j, 	&c0, &c1, &cov00, &cov01, &cov11, &batura);
-    xreg1 = x[j];
-    yreg1 = c0 + c1*xreg1;
-    xreg0 = x[0];
-    yreg0 = c0 + c1*xreg0;
-    angelua = abs(atan2(yreg1-yreg0, xreg1 - xreg0));
-  }
-  
-	/* Kalkulatu robota eta paretaren arteko angelua */
-	
-  std::cout << "Angelua: " << angelua << std::endl;
-	/* Abiadurak finkatu */
-	w = (M_PI/2-angelua) * Kp;
-
-
-
-  std::cout << "w: " << w << std::endl;
-
-	robota.SetSpeed(0.2, w);
-  //robota.SetSpeed(0,0);
-	
+      // Pipe > erabiltzen csv fitxeroa lortzeko
+      if (batch % 20 == 0)
+            std::cout << laserra.GetRange(0) << "," << errorea << "," << robota.GetXPos() << "," << robota.GetYPos() <<"\n"; 
+      batch++;
       }
     
   }

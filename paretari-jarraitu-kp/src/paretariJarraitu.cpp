@@ -30,8 +30,9 @@ main(int argc, const char **argv)
   float dist;
   float Kp;
   int tarte;
+  int batch = 0;
 
-  string fileName = "outData.txt";
+  string fileName;
 
   signal(SIGINT, closeAll);
   if (argc < 3)
@@ -49,14 +50,10 @@ main(int argc, const char **argv)
   
   std::cout << "Distantzia: " << dist << " Kp: " << Kp << " outFileName: " << fileName << std::endl;
   datuFitx  << "# Distantzia: " << dist << " Kp: " << Kp  << "\n";
-  datuFitx  << "# BatezbDist  Errorea  w v X Y dist\n";
+  datuFitx  << "Batezbesteko distantzia,Distantzia,Errorea,X,Y\n";
 
   v = 0.2;
-  tarte = 30; // 45-60 hoberena
-
-  // 60, 0.9 -> 1.7 (2)
-  // 40, 09 -> 1.84  (2)
-  // 30, 0.9 -> 1.9 (2)
+  tarte = 45; 
 
   try
   {
@@ -93,8 +90,9 @@ main(int argc, const char **argv)
       /* Abiadurak finkatu proportzionalki */
       w = Kp*diff;
       robota.SetSpeed(v, w);
-      datuFitx << batezbdist << " " << diff << " " << w << " " << v << " " << robota.GetXPos() << " " << robota.GetYPos() << " " << laserra.GetRange(0) <<"\n"; 
-
+      if (batch % 25 == 0)
+        datuFitx << batezbdist <<"," << laserra.GetRange(0) << "," << diff << "," << robota.GetXPos() << "," << robota.GetYPos() <<"\n"; 
+      batch++;
       }
     
   }
