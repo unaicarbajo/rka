@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from ev3dev2.motor import OUTPUT_C, OUTPUT_B, MoveTank
 from ev3dev2.sensor import Sensor
+from ev3dev2.sensor.lego import ColorSensor
 from ev3dev2.sensor import INPUT_1
 from ev3dev2.sensor import INPUT_4
 import random
@@ -17,8 +18,7 @@ class lerroJarraitzailea(Thread):
         self.vl = vl
         self.vr = vr
         self.robot =  MoveTank(OUTPUT_C,OUTPUT_B)
-
-
+        
     def run(self):
         out = True
         left_per = 0
@@ -82,23 +82,57 @@ class lerroJarraitzailea(Thread):
 
 
 class semaforoIrakurlea(Thread):
-    def __init__(self, threadID):
+    def __init__(self, threadID, kode0, kode1, kode2):
         Thread.__init__(self)
         self.threadID = threadID
+        self.kode = [kode0, kode1, kode2]
         self.running = True
-        self.sensor = Sensor(INPUT_4)
+        self.sensor = ColorSensor(INPUT_4)
 
+
+    # COLOR_RED = 0
+    # COLOR_GREEN = 1
+    # COLOR_BLUE = 2
 
     def run(self):
+        sem = [-1, -1, -1]
+        kol_n = 0
+        global sem_zuzena
+        sem_zuzena = False
         while self.running:
-            print(self.sensor.value)
+            rgb = self.sensor.rgb
+            koloremax = max(rgb)
+            kolore = rgb.index(koloremax) if (koloremax > 150) else -1
+            
+            if (kolore == 1): # berdea
+                kolore_urdin = rgb[2]
+                if (abs(koloremax - kolore_urdin) < 50):
+                    kolore = 2
+
+            if (kolore != -1 and kol_n == 0):
+                sem[kol_n] = kolore
+                kol_n += 1
+            elif (kolore != -1 and sem[kol_n-1] != kolore):
+                sem[kol_n] = kolore
+                kol_n += 1
+                if (kol_n == 3):
+                    kol_n = 0
+                    sem_zuzena = True if (sem==self.kode) else False
+                    print(sem)
+                    sem = [-1,-1,-1]
+            else:
+                sem = [-1, -1, -1]
+            sleep(0.01)
+                
+            
             
 
 
 if __name__ == '__main__':
     t = lerroJarraitzailea(1, 25, 25)
-    s = semaforoIrakurlea(2)
+    s = semaforoIrakurlea(2,-1,-1,-1)
     t.setDaemon = True
+    s.setDaemon = True
     t.start()
     s.start()
     while True:
