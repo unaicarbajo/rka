@@ -20,14 +20,14 @@ class lerroJarraitzailea(Thread):
         self.vl = vl
         self.vr = vr
         self.robot =  MoveTank(OUTPUT_C,OUTPUT_B)
-        
+
     def run(self):
         out = True
         left_per = 0
         right_per = 0
         umbral = 20
         while self.running:
-            # Sentzorea biratuta
+            # Sentsorea biratuta
             s0 = self.lsa.value(0)
             s1 = self.lsa.value(1)
             s2 = self.lsa.value(2)
@@ -44,6 +44,14 @@ class lerroJarraitzailea(Thread):
                     left_per = 0.5
                     out = False
                 elif s1 < umbral and s2 < umbral:
+                    #print("[   ][   ][   ][   ][   ][XXX][XXX][   ]")
+                    left_per = 0.7
+                    out = False
+                elif s2 < umbral and s3 < umbral:
+                    #print("[   ][   ][   ][   ][XXX][XXX][   ][   ]")
+                    left_per = 0.90
+                    out = False
+                elif s7 < umbral and s6 < umbral:
                     #print("[XXX][XXX][   ][   ][   ][   ][   ][   ]")
                     right_per = 0.5
                     out = False
@@ -81,24 +89,24 @@ class lerroJarraitzailea(Thread):
                 right_per = 1
                 out = False
 
-            # Sentzoreak semaforo bat irakurri eta semaforoak kodearekin bat egiten du
+            # Sentsoreak semaforo bat irakurri eta semaforoak kodearekin bat egiten du
             # Robota eskumarantz ateratzeko saiakerak egiten ditu, bidegurutzetik ateratzeko
             if (sem_flag == 1):
                 self.robot.on(self.vl*left_per*0.4, self.vr*right_per*1.2)
-            # Sentzoreak semaforo bat irakurri baina semaforoak kodearekin ez du bat egiten
+            # Sentsoreak semaforo bat irakurri baina semaforoak kodearekin ez du bat egiten
             # Robota aurrerantz jarraitzeko helburua dauka, baina ezkerrerantz joateko
             # saikareak egiten ditu (oso lehunak), bidegurutzea ekiditeko
 
             elif (sem_flag == 0):
                 self.robot.on(self.vl*left_per*1.1, self.vr*right_per*0.9)
 
-            # Sentzoreak ez du semafororik irakurri, aurrerantz jarraitzen du
+            # sentsoreak ez du semafororik irakurri, aurrerantz jarraitzen du
             else:
                 self.robot.on(self.vl*left_per, self.vr*right_per)
 
 
 # Bigarren haria: semaforoaren portaeraren kontroladorea.
-# Kontrolatzen du kolore-sentzorearen irakurketak eta
+# Kontrolatzen du kolore-sentsorearen irakurketak eta
 # flag baten izaera
 # Dokumentazioa: https://ev3dev-lang.readthedocs.io/projects/python-ev3dev/en/stable/sensors.html
 class semaforoIrakurlea(Thread):
@@ -111,23 +119,19 @@ class semaforoIrakurlea(Thread):
         self.sensor = ColorSensor(INPUT_4)
 
 
-    # COLOR_RED = 0
-    # COLOR_GREEN = 1
-    # COLOR_BLUE = 2
-
     def run(self):
         sem = [-1, -1, -1]
         kol_n = 0
         # sem_flag: flag triestatua
-        #      0- Sentzoreak semaforo bat irakurri baina semaforoak kodearekin ez du bat egiten
-        #      1- Sentzoreak semaforo bat irakurri eta semaforoa kodearekin bat egiten du
-        #      2- Sentzoreak ez du semafororik irakurri
+        #      0- sentsoreak semaforo bat irakurri baina semaforoak kodearekin ez du bat egiten
+        #      1- sentsoreak semaforo bat irakurri eta semaforoa kodearekin bat egiten du
+        #      2- sentsoreak ez du semafororik irakurri
         global sem_flag
         sem_flag = 2
         while self.running:
-            # Kolore sentzorea: RGB balioak
+            # Kolore sentsorea: RGB balioak
             rgb = self.sensor.rgb
-            # Kolore sentzorea: kolorearen indizea
+            # Kolore sentsorea: kolorearen indizea
             kolore_lur = self.sensor.color
             
             koloremax = max(rgb)
